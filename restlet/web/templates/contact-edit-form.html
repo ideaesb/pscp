@@ -1,0 +1,36 @@
+<#import "form-macros.ftl" as forms>
+<form action="${form.url}" method="POST">
+    <div class="section">
+        <h4>Contact Info</h4>
+        <@forms.inputText field=form.atts.person required=true/>
+        <@forms.inputText form.atts.phone/>
+        <@forms.inputText form.atts.email/>
+    </div>
+    <div class="section">
+        <@forms.checkbox form.atts.resetPassword>
+            <p>If checked, your password will be reset to an automatically generated sequence.</p>
+        </@forms.checkbox>
+    </div>
+    
+    <#if page.admin!false>
+        <div class="section">
+                <@forms.checkbox field=form.atts.admin>
+                    <p>If checked, this user is an administrator</p>
+                </@forms.checkbox>
+                <#if (form.atts.person.value!"") != "">
+                    <@forms.checkbox field=form.atts.deactivate>
+                        <p>If checked, this user will no longer be able to login, and if
+                        possible (they have no uploaded products associated with their account), they
+                        will be deleted.</p>
+                    </@forms.checkbox>
+                </#if>
+        </div>
+    </#if>
+
+    <#list form.hidden?keys as key>
+        <@forms.hidden form.hidden[key]/>
+    </#list>
+    <div class="section">
+        <input type="submit"/>
+    </div>
+</form>

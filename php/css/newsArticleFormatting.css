@@ -1,0 +1,43 @@
+/** NEWS ARTICLE SCREEN FORMATTING **/
+h1 {}
+h2 { 
+	font-weight: bold;
+	color: #0057A5; 
+}
+h3 {
+	color: #00a3e3; 
+}
+#releaseDate {
+	font-size: 1em;
+	font-weight: bold;
+	color: #666666;
+}
+#contentArea img  {
+}
+
+#imageDownload {
+	color: #AAAAAA;
+	margin-top: 3px;
+	margin-left: 3px;
+	margin-bottom: 0px;
+}
+.leftAlignImage img, .rightAlignImage img { 
+	width: 200px; 
+	border: none;
+}
+.leftAlignImage, .rightAlignImage {
+	padding: 4px;
+	border: 1px solid #CCCCCC; 
+	width: 200px;
+	height: auto;
+	color: #666666;
+	font-size: .9em;
+}
+.leftAlignImage { 
+	float: left;
+	margin-right: 10px;
+}
+.rightAlignImage {
+	float: right;
+	margin-left: 10px;
+}

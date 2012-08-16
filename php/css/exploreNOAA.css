@@ -1,0 +1,19 @@
+/** Explore NOAA **/
+	#exploreNOAA { 
+		width: 100%;
+	}
+	#exploreNOAAItems {
+		list-style-type: none;
+		background: url('/images/back_explore.png') repeat-x;
+		margin: 0px;
+		padding: 4px; 
+		border-top:1px solid  #83C696;
+		border-left: 1px solid #CAF9CA;
+		border-right: 1px solid #CAF9CA;
+	}
+	#exploreNOAAItems li {
+		display: inline;
+	}
+	#exploreNOAAItems img {
+		border: 0px;
+	}

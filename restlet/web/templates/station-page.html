@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>Pacific Storms Climatology Products - Station ${station.name}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+        <link rel="stylesheet" type="text/css" href="/css/station.css" />
+    </head>
+    <body>
+        <div class="centered">
+            <table>
+                <tr>
+                    <td>
+                        <table id="stationinfo">
+                            <tr>
+                                <td class="title" colspan="2">Pacific Storms Climatology Products</td>
+                            </tr>
+                            <tr>
+                                <td class="fieldLabel">Process: </td>
+                                <td class="value">${station.process}</td>
+                            </tr>
+                            <tr>
+                                <td class="fieldLabel">Station Name: </td>
+                                <td class="value">${station.name}</td>
+                            </tr>
+                            <tr>
+                                <td class="fieldLabel">Nation: </td>
+                                <td class="value">${station.nation}</td>
+                            </tr>
+                            <tr>
+                                <td class="fieldLabel">Instrument: </td>
+                                <td class="value">${station.instrument}</td>
+                            </tr>
+                            <tr>
+                                <td class="fieldLabel">Operator: </td>
+                                <td class="value">${station.operator}</td>
+                            </tr>
+                            <tr>
+                                <td class="fieldLabel">Latitude: </td>
+                                <td class="value">${station.latitude}</td>
+                            </tr>
+                            <tr>
+                                <td class="fieldLabel">Longitude: </td>
+                                <td class="value">${station.longitude}</td>
+                            </tr>
+                            <tr>
+                                <td class="fieldLabel">Status: </td>
+                                <td class="value">${station.status}</td>
+                            </tr>
+                            <tr>
+                                <td class="fieldLabel">Station&nbsp;Metadata: </td>
+                                <td class="value">${station.metadata}</td>
+                            </tr>
+                            <tr><td colspan="2"><div class="subHeader">About&nbsp;the&nbsp;Data</div></td></tr>
+                            <tr>
+                                <td class="fieldLabel">Source: </td>
+                                <td class="value">${station.source}</td>
+                            </tr>
+                            <tr>
+                                <td class="fieldLabel">Source&nbsp;ID: </td>
+                                <td class="value">${station.sourceid}</td>
+                            </tr>
+                            <tr>
+                                <td class="fieldLabel"><a href="/index.php?page=inclusion">Data Quality</a>: </td>
+                                <td class="value">${station.quality}</td>
+                            </tr>
+                            <tr>
+                                <td class="fieldLabel">Data&nbsp;Metadata: </td>
+                                <td class="value">${station.datametadata}</td>
+                            </tr>
+                            <tr><td colspan="2"><div class="subHeader">Product Listing</div></td></tr>
+                            <tr>
+                                <td colspan="2">
+                                    <table width="100%">
+                                        <tr>
+                                            <td class="tableLabel">Group</td>
+                                            <td class="tableLabel">Name</td>
+                                            <td class="tableLabel">Last&nbsp;Updated</td>
+                                            <td class="tableLabel">Graph</td>
+                                        </tr>
+                                        <tr>
+                                    <#list products as group>
+                                        <td class="tableData"><a target="about" href="${group.about}" title="Learn more about this product.">${group.name}</a></td>
+                                        <#assign firstTime = true>
+                                        <#list group.links as link>
+                                            <#if !firstTime>
+                                                <td>&nbsp;</td>
+                                            </#if>
+                                            <#assign firstTime = false>
+                                            <td class="tableData">${link.name}</td>
+                                            <td class="tableData">${link.date}</td>
+                                            <td class="tableData">
+                                            <#if link.thumb??>
+                                                <a href="${link.url}" target="_blank">
+                                                    <img alt="Click for more details" src="${link.thumb}"/>
+                                                </a>
+                                            <#else>
+                                                <a href="${link.url}" target="_blank">View Product</a>
+                                            </#if>
+                                            </td>
+                                        </tr><tr>
+                                        </#list>
+                                        <#assign lastGroup = group.name>
+                                    </#list>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td id="stationimg"><img src="/images/${station.image}"></img></td>
+                </tr>
+            </table>
+        </div>
+        
+    </body>
+</html>

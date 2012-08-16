@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="pscp-install" default="all" basedir=".">
+
+    <!-- PUT CUSTOMIZATION HERE -->
+    <property file="pscp.properties"/>
+
+    <!-- local destination for ftp downloads -->
+    <property name="ftp.dest.dir" value="${java.io.tmpdir}"/>
+
+    <!-- Database properties -->
+    <property name="pg.home" value="C:/Program Files/PostgreSQL/8.3" description="postgres install home"/>
+    <property name="pg.db" value="pscp" description="postgres database name"/>
+    <property name="pg.host" value="localhost" description="postgres database host"/>
+    <property name="pg.user" value="postgres" description="postgres database user"/>
+    <property name="pg.pass" value="admin123" description="postgres database pass"/>
+
+    <!-- Web install properties -->
+    <property name="apache.root" value="C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs" description="apache document root"/>
+    <property name="apache.conf" value="C:/Program Files (x86)/Apache Software Foundation/Apache2.2/conf" description="apache config dest"/>
+    <property name="pscp.conf.dest" value="${apache.conf}/extra/pscp.conf" description="apache config dest"/>
+    <property name="php.dest" value="pscp" description="location under apache document root for php install"/>
+    <property name="google.key" value="ABQIAAAAg66ljWi8jUinaW9col7DqxSmYwebCFVuhfOcQad8g2y0xtCVXxQgbQ6_ERk8yLjOGwpXKZ7yymasIw" description="google key value"/>
+
+    <!-- Web configuration properties -->
+    <property name="host.fqn" value="localhost" description="web hosts' fully qualified name"/>
+    <property name="url.root" value="http://${host.fqn}/${php.dest}/" description="outside address of app"/>
+    <property name="url.products" value="${url.root}/images/product.php?img=" description="URL to find products at"/>
+    <property name="product.root" value="${apache.root}/${php.dest}/products" description="directory where product images go"/>
+    <property name="upload.root" value="C:/pscp-uploads" description="directory where uploaded files and logs go for archiving"/>
+    <property name="apache.restart" value="false"/>
+
+    <!-- Tomcat properties -->
+    <property name="tomcat.home" value="C:/apache-tomcat-5.5.33" description="location of tomcat home"/>
+    <property name="tomcat.manager" value="http://localhost:8080/manager" description="URL of tomcat manager"/>
+    <property name="tomcat.user" value="admin" description="tomcat manager login"/>
+    <property name="tomcat.pass" value="admin123" description="tomcat manager pass"/>
+    <property name="catalina.jar" value="${tomcat.home}/server/lib/catalina-ant.jar" description="location of tomcat webapps"/>
+    <property name="webapp.name" value="pscp-api" description="context name"/>
+
+    <!-- Proxy name -->
+    <property name="api.root" value="/${webapp.name}" description="proxy url to webapp"/>
+
+    <!-- Internal properties -->
+    <property name="ftp.checknewer" value="no" description="set to yes to make FTP look at timestamps before retreiving"/>
+    <property name="psql" value="${pg.home}/bin/psql.exe"/>
+    <property name="pg_restore" value="${pg.home}/bin/pg_restore.exe"/>
+    <tempfile property="report.file" deleteonexit="true"/>
+
+    <target name="update" description="update the pscp web application" depends="web,servlet,update-db"/>
+
+    <target name="all" description="install all parts" depends="-web, -servlet, -report"/>
+    <target name="web" description="download and install PHP" depends="-web,-report"/>
+    <target name="servlet" description="download and install servlet" depends="-servlet,-report"/>
+    <target name="update-db" description="run database update script">
+        <exec executable="C:\PostgreSQL\8.3\bin\psql.exe" vmlauncher="false" failonerror="true">
+            <arg line="-h ${pg.host}"/>
+            <arg line="-p 5432"/>
+            <arg line="-U ${pg.user}"/>
+            <arg line="-d pscp"/>
+            <arg line="-f update.sql"/>
+        </exec>
+    </target>
+    <target name="db" description="download and install database" depends="-db,-report"/>
+    <target name="-web" description="download and install PHP" depends="-install-web,-notify-httpd,-restart-httpd,-no-restart-httpd"/>
+    <target name="-servlet" description="download and install servlet" depends="-prepare-war,-deploy"/>
+    <target name="-db" description="download and install database" depends="-list-db,-create-db,-install-db"/>
+
+    <target name="-report" depends="-md5">
+        <loadfile quiet="true" srcfile="${report.file}" property="report.txt"/>
+        <echo>SUMMARY:</echo>
+        <echo message="${report.txt}"/>
+    </target>
+
+    <target name="-ftp-get" unless="skip.ftp">
+        <ftpget file="pscp.db.backup"/>
+        <ftpget file="pscp.conf"/>
+        <ftpget file="pscp.web.zip"/>
+        <ftpget file="pscp-api.war"/>
+        <ftpget file="pscp.doc.zip"/>
+    </target>
+
+    <target name="-md5">
+        <echo>CHECKSUMS FOR INSTALL MEDIA</echo>
+        <concat>
+            <propertyset id="md5sums">
+                <propertyref prefix="md5"/>
+            </propertyset>
+        </concat>
+        <checksum format="MD5SUM" property="ant.md5">
+            <fileset file="${ant.file}"/>
+        </checksum>
+        <echo>pscp-install.xml ${ant.md5}</echo>
+    </target>
+
+    <target name="-list-db" depends="-check-pgpass,-create-pgpass">
+        <tempfile property="db.list.file" destdir="${java.io.tmpdir}"/>
+        <exec executable="${psql}" vmlauncher="false" output="${db.list.file}">
+            <arg line="-h ${pg.host}"/>
+            <arg line="-p 5432"/>
+            <arg line="-U ${pg.user}"/>
+            <arg line="-l"/>
+        </exec>
+        <loadfile srcFile="${db.list.file}" property="db.exists" failonerror="false">
+            <filterchain>
+                <linecontainsregexp>
+                    <regexp pattern="^ ${pg.db}.*"/>
+                </linecontainsregexp>
+            </filterchain>
+        </loadfile>
+        <delete file="${db.list.file}"/>
+    </target>
+
+    <target name="-create-db" depends="-check-pgpass,-create-pgpass" unless="db.exists">
+        <echo>Creating database ${pg.db}</echo>
+        <exec executable="${psql}" vmlauncher="false">
+            <arg line="-h ${pg.host}"/>
+            <arg line="-p 5432"/>
+            <arg line="-U ${pg.user}"/>
+            <arg line="-c 'CREATE DATABASE ${pg.db}'"/>
+        </exec>
+        <echo>*** If you are running the db restore for the first time, it will fail trying to drop the tables</echo>
+        <echo>*** This is okay as long as the database was actually created.</echo>
+        <sleep seconds="2"/>
+    </target>
+
+    <target name="-install-db" depends="-check-pgpass,-create-pgpass,-ftp-get">
+        <exec executable="${pg_restore}" vmlauncher="false" failonerror="true">
+            <arg line="-c"/>
+            <arg line="-h ${pg.host}"/>
+            <arg line="-p 5432"/>
+            <arg line="-U ${pg.user}"/>
+            <arg line="-d ${pg.db}"/>
+            <arg line="-v"/>
+            <arg line="'${ftp.dest.dir}/pscp.db.backup'"/>
+        </exec>
+    </target>
+
+    <target name="-create-pgpass" unless="pgpass.entry">
+        <mkdir dir="${user.home}/Application Data/postgresql"/>
+        <echo file="${user.home}/Application Data/postgresql/pgpass.conf" append="true">${pg.host}:5432:*:${pg.user}:${pg.pass}
+        </echo>
+    </target>
+
+    <target name="-check-pgpass">
+        <loadfile srcFile="${user.home}/Application Data/postgresql/pgpass.conf" property="pgpass.exists" failonerror="false">
+            <filterchain>
+                <linecontains>
+                    <contains value="${pg.host}:5432:*:${pg.user}:${pg.pass}"/>
+                </linecontains>
+            </filterchain>
+        </loadfile>
+    </target>
+
+    <target name="-restart-httpd" if="apache.restart.enabled">
+        <echo>Restarting Apache</echo>
+        <exec executable="net" vmlauncher="false" failonerror="true">
+            <arg line="stop"/>
+            <arg line="apache2.2"/>
+        </exec>
+        <exec executable="net" vmlauncher="false" failonerror="true">
+            <arg line="start"/>
+            <arg line="apache2.2"/>
+        </exec>
+    </target>
+    <target name="-no-restart-httpd" unless="apache.restart.enabled">
+        <report>
+Apache will not be restarted, you must do this yourself.
+To enable apache restart, set the property apache.restart to 'true'</report>
+    </target>
+
+    <target name="-check-httpd" unless="skip.apache.conf">
+        <loadfile srcFile="${apache.conf}/httpd.conf" property="httpd.entry" failonerror="false">
+            <filterchain>
+                <linecontains>
+                    <contains value="Include ${pscp.conf.dest}"/>
+                </linecontains>
+            </filterchain>
+        </loadfile>
+    </target>
+
+    <target name="-apache-conf" depends="-check-httpd" unless="skip.apache.conf">
+        <copy file="${ftp.dest.dir}/pscp.conf" tofile="${pscp.conf.dest}"/>
+        <replace file="${pscp.conf.dest}" token="/pscp-api" value="${api.root}"/>
+        <replace file="${pscp.conf.dest}" token="/pscp" value="/${php.dest}"/>
+    </target>
+
+    <target name="-install-web" depends="-apache-conf,-ftp-get">
+        <mkdir dir="${apache.root}/${php.dest}"/>
+        <mkdir dir="${product.root}"/>
+        <unzip src="${ftp.dest.dir}/pscp.web.zip" dest="${apache.root}/${php.dest}"/>
+        <echo file="${apache.root}/${php.dest}/inc/constants.php"><![CDATA[<?php
+$pscp_db_name='${pg.db}';
+$pscp_db_user='${pg.user}';
+$pscp_db_pass='${pg.pass}';
+$pscp_db_host='${pg.host}';
+$api_root='${api.root}';
+$product_root='${product.root}';
+?>]]>
+        </echo>
+        <echo file="${apache.root}/${php.dest}/inc/google-key.php"><![CDATA[<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=${google.key}"
+        type="text/javascript"></script>
+]]>
+        </echo>
+        <condition property="apache.restart.enabled">
+            <istrue value="${apache.restart}"/>
+        </condition>
+    </target>
+
+    <target name="-notify-httpd" unless="httpd.entry">
+        <report>
+******* Web install successful, you need to add the following entry to the httpd.conf file:
+Include ${pscp.conf.dest}</report>
+    </target>
+
+    <target name="-check-catalina-jar">
+        <available file="${catalina.jar}" property="catalina.jar.available"/>
+    </target>
+
+    <target name="-init-tomcat-tasks" depends="-check-catalina-jar">
+        <fail unless="catalina.jar.available" message="The catalina.jar could not be found : ${catalina.jar}, ensure this file exists"/>
+        <taskdef resource="org/apache/catalina/ant/antlib.xml" classpath="${catalina.jar}"/>
+    </target>
+
+    <target name="-prepare-war" depends="-init-tomcat-tasks,-ftp-get">
+        <echoxml file="${java.io.tmpdir}/pscp-context.xml">
+            <Context antiJARLocking="true" antiResourceLocking="true" path="/pscp-api">
+                <Parameter name="pscp.db.host" value="${pg.host}" override="false"/>
+                <Parameter name="pscp.db.user" value="${pg.user}" override="false"/>
+                <Parameter name="pscp.db.pass" value="${pg.pass}" override="false"/>
+                <Parameter name="pscp.db.name" value="${pg.db}" override="false"/>
+                <Parameter name="pscp.web.root" value="${url.root}" override="false"/>
+                <Parameter name="pscp.web.products" value="${url.products}" override="false"/>
+                <Parameter name="pscp.product.root" value="${product.root}" override="false"/>
+                <Parameter name="pscp.upload.root" value="${upload.root}" override="false"/>
+            </Context>
+        </echoxml>
+        <mkdir dir="${upload.root}"/>
+        <copy file="${ftp.dest.dir}/pscp-api.war" tofile="${ftp.dest.dir}/pscp-api2.war"/>
+        <zip file="${ftp.dest.dir}/pscp-api2.war" update="true">
+            <zipfileset fullpath="META-INF/context.xml" file="${java.io.tmpdir}/pscp-context.xml"/>
+        </zip>
+    </target>
+
+    <target name="-deploy" depends="-init-tomcat-tasks">
+        <undeploy url="${tomcat.manager}"
+            username="${tomcat.user}"
+            password="${tomcat.pass}"
+            path="/${webapp.name}"
+            failonerror="no" />
+        <deploy url="${tomcat.manager}"
+            username="${tomcat.user}"
+            password="${tomcat.pass}"
+            path="/${webapp.name}"
+            war="${ftp.dest.dir}/pscp-api2.war"/>
+        <delete file="${ftp.dest.dir}/pscp-api2.war"/>
+    </target>
+
+    <macrodef name="ftpget">
+        <attribute name="file"/>
+        <sequential>
+            <ftp depends="${ftp.checknewer}" action="get" server="ftp.riverside.com" userid="anonymous" password="ok2ftp2" remotedir="outgoing/IDEA Center">
+                <fileset dir="${ftp.dest.dir}" includes="@{file}"/>
+            </ftp>
+            <checksum format="MD5SUM" property="@{file}.md5">
+                <fileset dir="${ftp.dest.dir}" includes="@{file}"/>
+            </checksum>
+            <property name="md5.@{file}" value="@{file} ${@{file}.md5}&#10;"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="report">
+        <text name="msg"/>
+        <sequential>
+            <echo file="${report.file}" append="true">@{msg}</echo>
+        </sequential>
+    </macrodef>
+</project>

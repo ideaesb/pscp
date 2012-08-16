@@ -1,0 +1,112 @@
+@charset "utf-8";
+body {
+    margin: 0px;
+    background: #2db0e7 url(../images/bg.png) no-repeat;
+}
+#container {
+    width: 960px;
+    min-height: 57em;
+    margin: 0px auto 5px auto;
+    padding: 0px 0px 2px 0px;
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    background-color: #FFFFFF;
+}
+
+.jswarn {
+    color: red;
+    font-weight: bold;
+}
+#contentArea > h1 {
+    padding-left: 13px;
+}
+
+.sectionTitle {
+    display: block;
+    margin-bottom: 2px;
+}
+
+.thin {
+    font-weight: lighter;
+    letter-spacing: 0.05em;
+}
+
+.centered {
+    text-align: center;
+}
+
+.content {
+    padding: 10px;
+}
+
+.content p {
+    padding: 5px;
+}
+
+.content shadow {
+    margin-left: 5px;
+}
+
+.imgcaption {
+    font-size: smaller;
+    color: #888888;
+}
+
+.shadow {
+    background-color: #9EcBe4;
+}
+
+.shadow > * {
+    background-color: #d0d8dE;
+    border: 1px solid #AEDBF4;
+    position: relative;
+    top: 3px;
+    right: 3px;
+}
+
+.development {
+    font-weight: 600;
+    width: 90%;
+    padding-top: 40px;
+}
+
+.caveat {
+    color: red;
+    width: 90%;
+    padding-top: 20px;
+}
+
+#leftNavExtras a {
+    display: block;
+}
+.meetingsTimeline { background-image: url('../images/timeline-bg.png'); background-repeat: no-repeat; background-position: center top; width: 760px; }
+.meetingsTimeline-Left { width: 375px; text-align: right; padding-right: 5px; vertical-align: top; }
+.meetingsTimeline-Center { width: 10px; padding: 0px 3px; vertical-align: top; }
+.meetingsTimeline-Center .bullet { color: #00A3E3; font-size: 40px; padding: 0px 0px 0px 1px; margin: 0px; line-height: 18px; }
+.meetingsTimeline-Center .bullet { padding /*\**/: 0px\9; } /* IE8 Only Hack */
+.meetingsTimeline-Right { width: 375px; padding-bottom: 30px; padding-left: 5px; vertical-align: top; }
+.meetingsTimeline-RightShort { width: 375px; padding-bottom: 5px; padding-left: 5px; vertical-align: top; }
+.meetingsTimeline-Point { background-image: url('../images/timeline-point.png'); background-repeat: no-repeat; background-position: center top; height: 15px; }
+.meetingsDocTable td { vertical-align: top; width: 20%; padding-right: 10px; }
+
+.clickable {
+    cursor: pointer;
+}
+
+.smallLabel {
+    font-size: 8pt;
+}
+
+.filterTable {
+    width: 100%;
+    background-color: #d9e8ef;
+}
+.smallButton {
+    font-size: 7pt;
+}
+.selectHeading {
+    color: white;
+    background-color: #eeeeee;
+    font-weight: 600;
+}

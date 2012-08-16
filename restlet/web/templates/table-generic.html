@@ -1,0 +1,20 @@
+<div id="contentTable">
+    <table>
+        <thead>
+            <tr>
+                <#list table.cols as col>
+                    <th>${col}</th>
+                </#list>
+            </tr>
+        </thead>
+        <tbody>
+            <#list table.rows as row>
+                <tr>
+                    <#list row as r>
+                        <td>${r!""}</td>
+                    </#list>
+                </tr>
+            </#list>
+        </tbody>
+    </table>
+</div>

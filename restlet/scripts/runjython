@@ -1,0 +1,3 @@
+#!/bin/bash
+
+CLASSPATH=build/web/WEB-INF/classes/\;$(cpath build/web/WEB-INF/lib/) jython2.5 $@

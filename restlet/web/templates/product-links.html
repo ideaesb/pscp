@@ -1,0 +1,23 @@
+<#if table.stationname??>
+    <h3>${table.stationname}</h3>
+    <a href="${table.stationpage}">[ Station Page ]</a>
+</#if>
+<#if table.message??>
+    <h5>${table.message}</h5>
+</#if>
+<#list table.linkgroups as group>
+    <h5>${group.name}</h5>
+    <div class="about"><a href="${group.about}">[About this product]</a></div>
+    <#list group.links as link>
+        <div class="productLink">
+            <span>${link.name}</span>
+            <#if link.thumb??>
+                <a href="${link.url}">
+                    <img alt="Click for larger image" src="${link.thumb}"/>
+                </a>
+            <#else>
+                <a href="${link.url}">View Product</a>
+            </#if>
+        </div>
+    </#list>
+</#list>

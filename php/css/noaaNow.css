@@ -1,0 +1,38 @@
+	/** NOAA NOW **/
+	#noaaNow {
+		font-family: Arial, Helvetica, sans-serif;
+		width: 100%;
+		margin-top: 10px;
+		position: relative;
+	}
+
+	#noaaNowList {
+		font-size: .9em;
+		width: inherit;
+		list-style-type: none;
+		padding-left: 0px;
+		margin: 0px;
+		background: url('/images/back_stories.png') repeat-x;
+		border-top:1px solid  #AEDBF4;
+		border-left: 1px solid #E3F6FF;
+		border-right: 1px solid #E3F6FF;
+	}
+	
+	#noaaNowList li {
+		background: url('/images/feature_stories_bullet.png') no-repeat;
+		padding: 4px 4px 4px 21px;
+		border-bottom:  1px dotted #dddddd;
+	}
+	
+	#noaaNowList li a:link { font-size: 1.25em;	}
+	#noaaNowList li a:visited {	font-size: 1.25em;}
+	li#subscribenoaaNow {
+		background: none;
+		border-bottom: none;
+		text-align: right;
+		padding-top: 1px;
+	}
+	li#subscribenoaaNow  * { vertical-align: middle; font-weight: normal;  }
+	li#subscribenoaaNow a:link, li#subscribenoaaNow a:visited {
+		font-size: 1em;
+	}

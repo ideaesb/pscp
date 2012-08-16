@@ -1,0 +1,43 @@
+/** Right-side News Releases **/
+	#newsReleases {
+		margin-top: 10px;
+		width: 100%; 
+		font-family: Arial, Helvetica, sans-serif;
+	}
+/*	#newsReleases a:link { color: #00a3e3; }
+	#newsReleases a:visited { color: #0057A5;	}
+	#newsReleases a:hover { color: #ffbf00;	}*/
+	#newsReleaseArchive { 
+		font-weight: normal;
+		float: right;
+		font-size: .8em;
+	}
+	#newsReleasesList {
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: .9em;
+		/* font-weight: bold; */
+		list-style-type: none;
+		padding-left: 0px;
+		margin: 0px; 
+		background: url('../images/back_stories.png') repeat-x;
+		border-top:1px solid  #AEDBF4;
+		border-left: 1px solid #E3F6FF;
+		border-right: 1px solid #E3F6FF;
+	}
+	
+	#newsReleasesList li {
+		background: url('../images/feature_stories_bullet.png') no-repeat;
+		padding: 4px 4px 4px 21px;
+		border-bottom:  1px dotted #dddddd;
+		font-weight: bold;
+		line-height: 1.25em;
+	}
+	
+
+	li#subscribeReleases  * { vertical-align: middle;  font-weight: normal;}
+	li#subscribeReleases  {
+		background: none;
+		border-bottom: none;
+		text-align: right;
+		padding-top: 1px;
+	}

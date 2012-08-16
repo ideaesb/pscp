@@ -1,0 +1,15 @@
+<#import "form-macros.ftl" as forms>
+<form action="${form.url}" method="POST">
+    <div class="section">
+        <#list form.atts?keys as key>
+            <@forms.inputText field=form.atts[key] required=true/>
+        </#list>
+        <div class="endrow"></div>
+        <#list form.hidden?keys as key>
+            <@forms.hidden form.hidden[key]/>
+        </#list>
+    </div>
+    <div class="section">
+        <input type="submit"/>
+    </div>
+</form>

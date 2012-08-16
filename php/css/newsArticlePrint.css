@@ -1,0 +1,11 @@
+/** NEWS ARTICLE PRINT FORMATTING **/
+#topNav { display: none; }
+#headTitle { background: none; }
+#midBlock { display: none; }
+#leftNav { display: none; }
+#container { width: 95%; }
+#contentArea {
+	margin-left: 20px; 
+	margin-right: 20px;
+}
+.leftAlignImage, .rightAlignImage { display: inline; }

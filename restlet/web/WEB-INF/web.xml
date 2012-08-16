@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+    <!-- The following may require configuration in the local tomcat context.xml -->
+    <!-- DATABASE - not using jndi/tomcat datasource definitions -->
+    <context-param>
+        <param-name>pscp.db.host</param-name>
+        <param-value>localhost</param-value>
+    </context-param>
+    <context-param>
+        <param-name>pscp.db.user</param-name>
+        <param-value>postgres</param-value>
+    </context-param>
+    <context-param>
+        <param-name>pscp.db.pass</param-name>
+        <param-value>admin123</param-value>
+    </context-param>
+    <context-param>
+        <param-name>pscp.db.name</param-name>
+        <param-value>pscp</param-value>
+    </context-param>
+    <!-- STATIC URLs -->
+    <context-param>
+        <description>URL of css,js,php,etc</description>
+        <param-name>pscp.web.root</param-name>
+        <param-value></param-value>
+    </context-param>
+    <context-param>
+        <description>URL of products</description>
+        <param-name>pscp.web.products</param-name>
+        <param-value>/images/product.php?img=</param-value>
+    </context-param>
+    <context-param>
+        <description>Relative URI of admin interface</description>
+        <param-name>pscp.web.admin</param-name>
+        <param-value>admin</param-value>
+    </context-param>
+    <!-- UPLOAD LOGGING/ARCHIVE AREA -->
+    <context-param>
+        <description>For development, this can be anywhere. If the location does not exist, then the
+        servlet will use TEMP/pscp-uploads and it will log a message.</description>
+        <param-name>pscp.upload.root</param-name>
+        <param-value>C:/pscp-uploads</param-value>
+    </context-param>
+    <!-- PRODUCT UPLOAD FINAL DESTINATION -->
+    <context-param>
+        <description>For development, this can be anywhere. If the location does not exist, then the
+        servlet will use TEMP/pscp-uploads (relative to Tomcat) and it will log a message.</description>
+        <param-name>pscp.product.root</param-name>
+        <param-value>C:/rtisw/webapp.pscp/webapp.pscp.php/products</param-value>
+    </context-param>
+    <!-- The following are required for restlet engine, don't change unless needed -->
+    <context-param>
+        <param-name>org.restlet.application</param-name>
+        <param-value>pscp.restlet.PSCPServices</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.restlet.autoWire</param-name>
+        <param-value>false</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>ServerServlet</servlet-name>
+        <servlet-class>com.noelios.restlet.ext.servlet.ServerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServerServlet</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+    <!-- we're not actually using sessions -->
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>

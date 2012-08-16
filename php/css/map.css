@@ -1,0 +1,142 @@
+#container {
+    width: 960px;
+}
+#searchByGroupSelect {
+    width: 8em;
+}
+#controls td {
+    padding: 0px;
+}
+#controls input {
+    vertical-align: middle;
+}
+#inputProductType,#inputProductType ul {
+    margin: 0 0 0 5px;
+    padding: 0 0 0 5px;
+}
+#inputProductType li {
+    list-style-type: none;
+    margin: 0 0;
+    padding: 0 0;
+}
+.control {
+    padding-left: 8px;
+}
+.title {
+    background: #C0DFFD;
+    font-weight:bold;
+    padding-left:5px;
+}
+#leftNav {
+    display:none;
+}
+.selected-station {
+    background:#0057A5;
+    color:white;
+}
+.selected-product {
+    background:red;
+    color:white;
+}
+.group {
+    border-bottom: 1px solid #C0DFFD;
+    width: 100%;
+    display: block;
+}
+.station {
+    height: 18px;
+    vertical-align: middle;
+    font-size: 10px;
+    cursor: pointer;
+}
+.station img {
+    padding-right:5px;
+    vertical-align: middle;
+}
+#legend {
+    padding-left: 5px;
+}
+#scrollArea {
+    width: 20em;
+    height: 500px;
+    overflow: auto;
+}
+.productLink {
+
+}
+.productLink span {
+    display: block;
+}
+.productLink a {
+
+}
+.productLink img {
+    border: none;
+}
+#aboutViewer div {
+    overflow: auto;
+    width: 400px;
+    height: 300px;
+}
+#aboutViewer {
+    border: 1px solid black;
+    padding: 5px;
+    display: none;
+    position: absolute;
+    z-index: 400;
+    background:#c0dffd;
+}
+#imageViewer {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 500;
+    overflow: auto;
+    top: 0;
+    left: 0;
+    background:#c0dffd;
+}
+#help, #showToggle {
+    cursor: pointer;
+}
+#imageViewer img {
+    width: 100%;
+}
+#maptitle {
+}
+.mapoverlay {
+    display:none;
+    z-index:100;
+    position:absolute;
+    height: 600px;
+    background:#c0dffd;
+}
+#products {
+    overflow: auto;
+    height: 100%;
+    text-align: center;
+}
+#productoverlay {
+}
+#helpoverlay {
+    text-align: justify;
+}
+#helpoverlay p,li {
+    padding:0 5px;
+}
+.hlink {
+    color:#FF6600;
+}
+#infoTab {
+    text-align: center;
+}
+#infoTab td {
+    text-align: left;
+}
+#infoTab table {
+}
+#help, #showToggle {
+    padding-left: 10px;
+    float:right;
+}

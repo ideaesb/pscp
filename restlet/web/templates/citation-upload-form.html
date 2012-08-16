@@ -1,0 +1,21 @@
+<#import "form-macros.ftl" as forms>
+<h3>Citations Upload</h3>
+<form action="" method="post" enctype="multipart/form-data">
+    <div class="section">
+        <h4>Upload Information</h4>
+        <@forms.inputFile field=form.atts.inputFile size=30 required=true>
+            <p>This should be an Excel file.</p>
+        </@forms.inputFile>
+        <div class="endrow"></div>
+    </div>
+    <div class="section">
+        <h4>Options</h4>
+        <@forms.checkbox field=form.atts.dryRun>
+            <p>If checked, no database modifications will be made.</p>
+        </@forms.checkbox>
+        <div class="endrow"></div>
+    </div>
+    <div class="section">
+        <input type='submit'/>
+    </div>
+</form>

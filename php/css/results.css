@@ -1,0 +1,103 @@
+#container {
+    width: 99%;
+    height: 800px;
+}
+h5 {
+    margin-top: 0;
+    margin-bottom: 1em;
+}
+.about {
+    display: block;
+    margin-top: 10px;
+}
+#centerArea {
+    padding: 0;
+    margin: 0;
+}
+.selected-station, #regions .selected {
+    background:#FF7F00;
+    color:white;
+}
+.station {
+    height: 18px;
+    vertical-align: middle;
+    font-size: 10px;
+    cursor: pointer;
+}
+.station img {
+    padding-right:5px;
+    vertical-align: middle;
+}
+.title {
+    background: #F0F8FE;
+    border-bottom: 1px solid #AEDBF4;
+}
+#legend {
+    padding-left: 5px;
+}
+#scrollArea {
+    width: 20em;
+    height: 500px;
+    overflow: auto;
+}
+.productLink {
+
+}
+.productLink span {
+    display: block;
+}
+.productLink a {
+    
+}
+.productLink img {
+    border: none;
+}
+#map {
+    width:600px;
+    height:600px;
+    clear:both;
+}
+#maptitle {
+}
+#regions {
+    padding: 5px;
+    margin: 0;
+}
+#regions li {
+    cursor: pointer;
+    float: left;
+    background: #F0F8FE;
+    border: 1px solid #AEDBF4;
+    border-bottom: none;
+    padding: 5px;
+    margin-left: 5px;
+    width: 8em;
+    list-style-type: none;
+    font-size: smaller;
+}
+#products {
+    overflow: auto;
+    height: 100%;
+    text-align: center;
+}
+#productoverlay {
+}
+#productTab {
+    margin-top: 10px;
+    height: 90%;
+    overflow: auto;
+}
+#infoTab {
+    text-align: center;
+}
+#infoTab td {
+    text-align: left;
+}
+#infoTab table {
+    width: 100%;
+    margin: 0 auto;
+}
+#rightArea {
+    left:800px;
+    width: 20em;
+}

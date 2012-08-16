@@ -1,0 +1,89 @@
+body {
+    background: #c0dede;
+    margin-left: 20px;
+    margin-top: 2em;
+    width: 960px;
+    
+}
+.title {
+    font: 18pt Verdana, Arial, Helvetica, sans-serif;
+    color: #3366CC;
+    line-height: 20px;
+    text-align: left;
+}
+
+#stationinfo {
+    width: 680px;
+}
+
+#stationimg {
+    vertical-align: top;
+}
+
+.bold {
+    font-weight: bolder;
+}
+.centered {
+    text-align: center;
+    width: 100%;
+}
+#stationinfo > div {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+.subHeader {
+    font: 12pt Verdana, Arial, Helvetica, sans-serif;
+    width: 100%;
+    background-color: #003366;
+    color: white;
+    text-align: left;
+    margin-top: 14px;
+    padding: 2px;
+}
+.fieldLabel {
+    font: 10pt Verdana, Arial, Helvetica, sans-serif;
+    color: #3366CC;
+    text-align: right;
+    vertical-align: top;
+}
+.groupLabel {
+    font: 12pt Verdana, Arial, Helvetica, sans-serif;
+    color: #3366CC;
+}
+.tableLabel {
+    font: 11pt Verdana, Arial, Helvetica, sans-serif;
+    color: #3366CC;
+    text-align: left;
+    border-bottom: solid 1px;
+}
+.tableData {
+    font: 9pt Verdana, Arial, Helvetica, sans-serif;
+    color: #003366;
+    text-align: left;
+    vertical-align: top;
+}
+.value {
+    color: #003366;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 10pt;
+    font-weight: bolder;
+    text-align: left;
+    vertical-align: top;
+}
+
+#products {
+    clear: both;
+    padding-top: 100px;
+}
+.productLink {
+
+}
+.productLink span {
+    display: block;
+}
+.productLink a {
+
+}
+.productLink img {
+    border: none;
+}

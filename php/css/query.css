@@ -1,0 +1,45 @@
+#container {
+    min-height:63em;
+    width: 960px;
+}
+#map span, #map a {
+    position: absolute;
+    font-weight: bolder;
+    color:white;
+    z-index: 100;
+    text-align: center;
+    cursor: pointer;
+}
+#map a:hover {
+    text-decoration: underline;
+}
+#rightArea {
+    border-left: 1px solid #AEDBF4;
+    border-bottom: 1px solid #AEDBF4;
+    left: 507px;
+    width: 250px;
+    font-size: small;
+}
+#rightArea li {
+    padding: 0px;
+    margin: 0px;
+}
+#rightArea ul {
+    padding-left: 5px;
+    margin-left: 5px;
+    list-style-type: none;
+}
+#rightArea .group {
+    background: #F0F8FE;
+    width: 100%;
+    display: block;
+}
+#rightArea .choices li {
+    padding-left: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.selected {
+    background: #FF7F00;
+    color: white;
+}

@@ -1,0 +1,11 @@
+	/** GENERAL DOCUMENT STYLES **/
+	@import url('header.css');
+	@import url('topNav.css');
+	@import url('midNav.css');
+	@import url('leftNav.css');
+	@import url('contentArea.css');
+	@import url('footer.css');
+	@import url('contentFormatting.css');
+	@import url('localStyle.css');
+        @import url('rightArea.css');
+        @import url('centerArea.css');

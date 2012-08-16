@@ -1,0 +1,24 @@
+<form action="" method="post" enctype="multipart/form-data">
+    <div class="section">
+        <h4>Product Source</h4>
+        <@forms.inputText field=form.atts.link size=52/>
+        <div>OR</div>
+        <@forms.inputFile field=form.atts.file size=52/>
+        <div class="row"></div>
+    </div>
+     <div class="section">
+        <h4>Revision Comments</h4>
+        <@forms.inputArea field=form.atts.comment/>
+    </div>
+    <#if form.atts.publish??>
+        <div class="section">
+            <h4>Publish</h4>
+            <p>By selecting this, the product will be visible to the public</p>
+            <@forms.checkbox field=form.atts.publish/>
+        </div>
+    </#if>
+    <@forms.hidden form.hidden.id/>
+    <div class="section">
+        <input type='submit' value="Change Revision"/>
+    </div>
+</form>

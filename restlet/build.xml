@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- You may freely edit this file. See commented blocks below for -->
+<!-- some examples of how to customize the build. -->
+<!-- (If you delete it and reopen the project it will be recreated.) -->
+<!-- By default, only the Clean and Build commands use this build script. -->
+<!-- Commands such as Run, Debug, and Test only use this build script if -->
+<!-- the Compile on Save feature is turned off for the project. -->
+<!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
+<!-- in the project's Project Properties dialog box.-->
+<project name="webapp.pscp.restlet" default="default" basedir=".">
+    <description>Builds, tests, and runs the project webapp.pscp.restlet.</description>
+    <import file="nbproject/build-impl.xml"/>
+    <import file="nbproject/profiler-build-impl.xml"/>
+    
+    <!--
+       Provide support for an installer that does not overwrite the database.
+    -->
+    <target name="update-website" description="Create an installer that updates the PSCP web application." depends="dist,php-dist,postgres-dist">
+    	<!--
+        <property name="deploy.ant.enabled" value="true"/>
+	<property name="deploy.ant.archive" location="${dist.war}"/>
+	<property name="tomcat.url" value="http://localhost:8080"/>
+	<property name="tomcat.password" value="admin123"/>
+	<property name="tomcat.username" value="admin"/>
+	<antcall target="-undeploy-ant" inheritall="true"/>
+        <antcall target="-deploy-ant" inheritall="true"/>
+        -->
+    </target>
+
+    <!-- some tomcat installations may require copying/linking the ant tasks from server/lib/catalina-ant.jar
+    to lib/catalina-ant.jar -->
+    <target name="deploy-williasmfork" description="deploy to williamsfork" depends="dist,php-williamsfork">
+        <property name="deploy.ant.enabled" value="true"/>
+        <property name="deploy.ant.archive" location="${dist.war}"/>
+        <property name="tomcat.url" value="http://localhost:8080"/>
+        <property name="tomcat.password" value="admin123"/>
+        <property name="tomcat.username" value="admin"/>
+        <antcall target="-undeploy-ant" inheritall="true"/>
+        <antcall target="-deploy-ant" inheritall="true"/>
+    </target>
+
+    <target name="php-williamsfork" description="php to williamsfork" depends="init">
+        <property name="williamsfork.mount" value="//localhost:8080/williamsfork/apache/htdocs/"/>
+        <copy todir="${williamsfork.mount}">
+            <fileset dir="../webapp.pscp.php" includes="**/*" excludes=".svn/**,nbproject/**,docs/**"/>
+        </copy>
+    </target>
+
+    <target name="php-dist" description="create distributable of php parts" depends="init">
+        <zip destfile="dist/pscp.web.zip">
+            <zipfileset dir="../webapp.pscp.php" includes="**/*" excludes="nbproject/**, scratch/**,**/Thumbs.db"/>
+        </zip>
+    </target>
+
+    <target name="src-dist" description="create full source dist" depends="init">
+        <zip destfile="dist/pscp.src.zip">
+            <zipfileset dir="." excludes="docs/**,**/uploads/*,**/williamsfork/**,**/dist/*,**/db/*,**/build/**,**/Thumbs.db"/>
+        </zip>
+    </target>
+
+    <target name="doc-dist" description="create doc dist" depends="init">
+        <zip destfile="dist/pscp.doc.zip">
+            <zipfileset dir="doc/word" includes="*.doc"/>
+        </zip>
+    </target>
+    
+    <target name="postgres-dist" description="Create a database dist." depends="init">
+    	<copy todir="dist">
+            <fileset dir="sql" includes="update.sql"/>
+        </copy>
+    </target>
+
+    <target name="postgres-dump" description="dump database" depends="init">
+        <exec executable="C:\Program Files\PostgreSQL\8.3\bin\pg_dump.exe" vmlauncher="false">
+            <arg line="-h localhost"/>
+            <arg line="-p 5432"/>
+            <arg line="-U postgres"/>
+            <arg line="-F c"/>
+            <arg line="-b -D -v"/>
+            <arg line="-f '${basedir}/dist/pscp.db.backup'"/>
+            <arg line="pscp"/>
+        </exec>
+    </target>
+
+    <target name="postgres-copy" description="copy db to local" depends="init,postgres-dump">
+        <exec executable="C:\Program Files\PostgreSQL\8.3\bin\pg_restore.exe" vmlauncher="false" failonerror="true">
+            <arg line="-c"/>
+            <arg line="-h localhost"/>
+            <arg line="-p 5432"/>
+            <arg line="-U postgres"/>
+            <arg line="-d pscp"/>
+            <arg line="-v"/>
+            <arg line="'${basedir}/dist/pscp.db.backup'"/>
+        </exec>
+    </target>
+
+    <target name="postgres-load" description="drop and load schema and fixture" depends="init">
+        <property name="host" value="localhost"/>
+        <exec executable="C:\Program Files\PostgreSQL\8.3\bin\psql.exe" vmlauncher="false" failonerror="true">
+            <arg line="-h ${host}"/>
+            <arg line="-p 5432"/>
+            <arg line="-U postgres"/>
+            <arg line="-c 'DROP DATABASE pscp'"/>
+        </exec>
+        <exec executable="C:\Program Files\PostgreSQL\8.3\bin\psql.exe" vmlauncher="false" failonerror="true">
+            <arg line="-h ${host}"/>
+            <arg line="-p 5432"/>
+            <arg line="-U postgres"/>
+            <arg line="-c 'CREATE DATABASE pscp'"/>
+        </exec>
+        <exec executable="C:\Program Files\PostgreSQL\8.3\bin\psql.exe" vmlauncher="false" failonerror="true">
+            <arg line="-h ${host}"/>
+            <arg line="-p 5432"/>
+            <arg line="-U postgres"/>
+            <arg line="-d pscp"/>
+            <arg line="-f sql\schema.sql"/>
+        </exec>
+        <exec executable="C:\Program Files\PostgreSQL\8.3\bin\psql.exe" vmlauncher="false" failonerror="true">
+            <arg line="-h ${host}"/>
+            <arg line="-p 5432"/>
+            <arg line="-U postgres"/>
+            <arg line="-d pscp"/>
+            <arg line="-f sql\fixture.sql"/>
+        </exec>
+    </target>
+
+    <target name="postgres-load-and-populate" description="drop and load schema, fixture, and test fixture" depends="init,postgres-load">
+        <exec executable="C:\Program Files\PostgreSQL\8.3\bin\psql.exe" vmlauncher="false" failonerror="true">
+            <arg line="-h ${host}"/>
+            <arg line="-p 5432"/>
+            <arg line="-U postgres"/>
+            <arg line="-d pscp"/>
+            <arg line="-f sql\testdata.sql"/>
+        </exec>
+    </target>
+
+    <target name="dist-all" description="build all deliverables" depends="dist,php-dist,postgres-dump,doc-dist,src-dist"/>
+
+    <target name="ftp" description="put deliverables on ftp" depends="dist-all">
+        <ftpput file="dist/pscp.db.backup"/>
+        <ftpput file="dist/pscp-api.war"/>
+        <ftpput file="dist/pscp.web.zip"/>
+        <ftpput file="dist/pscp.src.zip"/>
+        <ftpput file="dist/pscp.doc.zip"/>
+        <ftpput file="conf/pscp.conf"/>
+    </target>
+
+    <target name="ftp-installer-only" description="put deliverables on ftp">
+        <ftpput file="pscp-install.xml"/>
+    </target>
+
+    <target name="ftp-web-only" description="put deliverables on ftp" depends="php-dist">
+        <ftpput file="dist/pscp.web.zip"/>
+        <ftpput file="conf/pscp.conf"/>
+    </target>
+
+    <macrodef name="ftpput">
+        <attribute name="file"/>
+        <sequential>
+            <ftp server="ftp.riverside.com" userid="anonymous" password="ok2ftp2" remotedir="outgoing/IDEA Center">
+                <fileset file="@{file}"/>
+            </ftp>
+            <checksum format="MD5SUM" property="@{file}.md5">
+                <fileset file="@{file}"/>
+            </checksum>
+            <echo>@{file} ${@{file}.md5}</echo>
+        </sequential>
+    </macrodef>
+
+</project>

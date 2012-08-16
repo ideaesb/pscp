@@ -1,0 +1,12 @@
+#rightArea {
+    left: 490px;
+    position: relative;
+    top: 0;
+    width: 294px;
+}
+
+#rightArea h5 {
+    background-color:#F0F8FE;
+    border-top:1px solid #AEDBF4;
+}
+

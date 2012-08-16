@@ -1,0 +1,55 @@
+<div id="contentTable">
+    <table>
+        <tbody>
+            <tr>
+                <td>Station Name</td>
+                <td><strong>${table.stationname}</strong></td>
+            </tr>
+            <tr>
+                <td>Nation</td>
+                <td><strong>${table.nation}</strong></td>
+            </tr>
+            <tr>
+                <td>Instrument</td>
+                <td><strong>${table.stationclass}</strong></td>
+            </tr>
+            <tr>
+                <td>Operator</td>
+                <td>${table.onum!""}</td>
+            </tr>
+            <tr>
+                <td>Latitude</td>
+                <td>${table.latitude}</td>
+            </tr>
+            <tr>
+                <td>Longitude</td>
+                <td>${table.longitude}</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>${table.status}</td>
+            </tr>
+            <tr>
+                <td>Station&nbsp;Metadata</td>
+                <td><a href="${table.metadata}">Link</a></td>
+            </tr>
+            <tr>
+                <td>Data Source</td>
+                <td><strong>${table.dataset_source}</strong></td>
+            </tr>
+            <tr>
+                <td>Source ID</td>
+                <td><strong>${table.dataset_sourceid}</strong></td>
+            </tr>
+            <tr>
+                <td><a href="/index.php?page=inclusion">Data Quality</a></td>
+                <td><strong>Level ${table.dataset_quality}</strong></td>
+            </tr>
+            <tr>
+                <td>Data Metadata</td>
+                <td><a href="${table.dataset_metadataurl}">Link</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <a id="stationpage" href="${table.stationpage}">[ View All Products for this Station ]</a>
+</div>

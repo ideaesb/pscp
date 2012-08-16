@@ -1,0 +1,9 @@
+#!/bin/bash
+SEP=":" 
+if [[ $OSTYPE == "cygwin" ]] ; then
+    SEP=";" 
+fi
+
+CLASSPATH="build/web/WEB-INF/classes/${SEP}build/web/WEB-INF/lib/\*"
+echo $CLASSPATH
+java -cp "$CLASSPATH" "$@"

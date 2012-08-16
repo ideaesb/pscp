@@ -1,0 +1,36 @@
+<#import "form-macros.ftl" as forms>
+<h3>Product Upload</h3>
+<a class="helplink" href="product-upload.html">Help</a>
+<form action="" method="post" enctype="multipart/form-data">
+    <div class="section">
+        <h4>Upload Information</h4>
+        <@forms.inputFile field=form.atts.inputFile size=30 required=true>
+            <p>This should be a zip file.</p>
+        </@forms.inputFile>
+        <@forms.inputText field=form.atts.productSource required=true>
+            <p>The agency/source of these products.</p>
+        </@forms.inputText>
+        <div class="endrow"></div>
+    </div>
+    <div class="section">
+        <h4>Options</h4>
+        <@forms.checkbox field=form.atts.dryRun>
+            <p>If checked, no database modifications will be made.</p>
+        </@forms.checkbox>
+        <#if page.adminUser>
+            <@forms.inputRadio field=form.atts.contact>
+                <p>When uploading on behalf of someone else, select their name from this list.</p>
+            </@forms.inputRadio>
+            <@forms.checkbox field=form.atts.allowProductCreation>
+                <p>Allow the upload to generate product definitions if none exist.</p>
+            </@forms.checkbox>
+            <@forms.checkbox field=form.atts.autoRevision default="true">
+                <p>Allow the upload to set the product revisions to current.</p>
+            </@forms.checkbox>
+        </#if>
+        <div class="endrow"></div>
+    </div>
+    <div class="section">
+        <input type='submit'/>
+    </div>
+</form>

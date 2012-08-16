@@ -1,0 +1,19 @@
+<#import "form-macros.ftl" as forms>
+<h3>Citations Upload</h3>
+<form action="" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="${form.id}"/>
+    <div class="section">
+        <h4>Upload Information</h4>
+        <p>You are choosing a file for the citation titled : <em>${form.citation}</em></p>
+        <p>Either choose an existing file or upload a new one</p>
+        <@forms.inputFile field=form.atts.inputFile size=30>
+            <p>This should be a document.</p>
+        </@forms.inputFile>
+        <@forms.select field=form.atts.existingFile>
+        </@forms.select>
+        <div class="endrow"></div>
+    </div>
+    <div class="section">
+        <input type='submit'/>
+    </div>
+</form>

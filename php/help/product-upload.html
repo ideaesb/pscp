@@ -1,0 +1,56 @@
+<style type="text/css">
+    .filelayout * {
+        list-style: none;
+    }
+</style>
+<h3>Product Upload Instructions</h3>
+
+<p>Products for the website should be provided in a zip file. The name of the
+file is not important, but the contents must be named appropriately. The naming
+of the zip contents will mirror the products' type, process, and name.
+The zip file must have an internal structure two directories deep.</p>
+
+<p>The top level directories in the zip file indicate the type, name, and
+process that are represented by all of the products beneath that directory. A
+given upload may contain multiple top level directories.</p>
+
+<p>The product types and names listing can be found
+    <a href="http://williamsfork.riverside.com/pscp-api/producttypes" target="_">here</a>.
+</p>
+
+<p>The directories under the top level indicate the product names, specifically,
+ the indicator, class, period, quadrant, and parameter the contents within.</p>
+
+<p>Finally, the contents of the lowest directory should be the actual products.
+ These should be named according to station name or station dataset id.</p>
+
+<h4>Example</h4>
+<ul class="filelayout">
+    <li>uploads.zip
+        <ul>
+            <li>1.1/
+                <ul>
+                    <li>HR 1day Annual/
+                    <ul>
+                        <li>512960.png</li>
+                        <li>513054.png</li>
+                    </ul>
+                    <li>HR 5day Annual/
+                    <ul>
+                        <li>512960.png</li>
+                        <li>513054.png</li>
+                    </ul>
+                </ul>
+            </li>
+            <li>2.1
+                <ul>
+                    <li>HS waves power/
+                    <ul>
+                        <li>512960.png</li>
+                        <li>513054.png</li>
+                    </ul>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>

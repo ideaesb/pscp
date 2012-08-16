@@ -1,0 +1,49 @@
+<script type="text/javascript">
+    var selectedProcess;
+    var selectedGroup;
+    acdata.init.stationid = function(ac) {
+        ac.result(function(e,item) {
+            selectedProcess = item.name.split("-")[1];
+            reload();
+        });
+        selectedProcess = ac.val().split("-");
+        selectedProcess = selectedProcess.length ? selectedProcess[1] : null;
+    }
+    acdata.opts.stationid = {
+        matchContains : true
+    };
+    acdata.opts.typeid = {
+        matchContains : true,
+        formatMatch : function(row,pos) {
+            var match = row.name.substr(0, 2) == selectedProcess && row.groupid == selectedGroup;
+            return match && row.name;
+        }
+    };
+    function reload() {
+        acdata.objs.typeid.val("");
+        acdata.objs.typeid.setOptions({data:acdata.vals.typeid});
+    }
+    $(function() {
+        selectedGroup = $("#productgroup").change(function() {
+            selectedGroup = $(this).val();
+            reload();
+        }).val();
+    });
+</script>
+<form action="" method="post">
+    <div class="section">
+        <h4>Station Information</h4>
+        <@forms.inputText field=form.atts.stationid size=52/>
+        <div class="row"></div>
+    </div>
+    <div class="section">
+        <h4>Data</h4>
+        <@forms.select field=form.atts.productgroup/>
+        <@forms.inputText field=form.atts.nameid size=52/>
+        <div class="row"></div>
+    </div>
+    <@forms.hidden form.hidden.id/>
+    <div class="section">
+        <input type='submit'/>
+    </div>
+</form>

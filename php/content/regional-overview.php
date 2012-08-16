@@ -1,0 +1,31 @@
+<div id="contentArea">
+
+    <h1>Regional Climatology</h1>
+    <div class="content">
+        <p>This section provides details on how atmospheric and oceanographic features manifest as extreme events within the following regions of the Pacific:</p>
+        <ul>
+            <li><a href="index.php?page=overview-cnp">Central North Pacific</a> (Hawaiian Islands)</li>
+            <li><a href="index.php?page=overview-nnp">Northern North Pacific</a> (Gulf of Alaska, British Columbia, Washington, and Oregon)</li>
+            <li>Eastern North Pacific (California) - Not Implemented</li>
+            <li><a href="index.php?page=overview-wnp">Western North Pacific</a> (Micronesia)</li>
+            <li><a href="index.php?page=overview-csp">Central South Pacific</a> (Polynesia)</li>
+            <li>Eastern South Pacific (South America) - Not Implemented</li>
+        </ul>
+     <h2>Overview - North Pacific</h2>
+        <div style="float:right; width: 400px; padding-left: 10px;">
+            <img width="400px" src="images/overview/gfs3_MSLP_AnnualAverage.gif"/>
+            <p class="imgcaption">In this plot of the annual average Mean Sea Level Pressure (MSLP) note the area of strong average low pressure (in dark orange) centered on the Gulf of Alaska and that corresponds to the the Aleutian Low.  Also note the area of strong average high pressure (in deep blue) that extends across the central North Pacific and that corresponds to the North Pacific High.  Source NCDC   </p>
+        </div>
+        <p>Atmospheric circulation and, in turn, "storminess" in the extra-tropical North Pacific is dominated by the interplay between the <a href="index.php?page=glossary#nph">North Pacific High</a> (NPH) and the <a href="index.php?page=glossary#al">Aleutian Low</a>.  The North Pacific High is a massive semi-permanent, quasi-circular high-pressure system, or subtropical anticyclone, centered around 30°–40°N and 140°–150°W.  It is associated with the <a href="index.php?page=glossary#hc">Hadley Cell</a> and the tropical easterly Trade winds that occur at the surface between about latitude 30° and the equator.  The Aleutian Low is a region of generally low pressure located near the Aleutian Islands, where sub-polar cyclones reach their maximum intensity.  It is associated with the Ferrel Cell and the prevailing westerly winds at the surface between latitude 30° and 60°N.</p>
+        
+        <p>Seasonal variations in position and intensity characterize the interplay between these two regional <a href="index.php?page=glossary#coa">centers of action</a>.  During the boreal winter the North Pacific High is located farther south, closer to the equator, and on average is smaller, weaker or even absent.  The Aleutian Low is large, semi-permanent, and most intense.  It too is located farther south, with the associated prevailing westerlies reaching as far south as 28°N.  It is during this time that extra-tropical storms regularly spin-up off the Aleutian Low, drop into the prevailing westerlies, and strike the US West Coast and Alaska with strong winds, heavy rains, and highs seas.  These storms are also responsible for the high waves that reach the northern shores of the Hawaiian Islands during the winter wet season.</p>
+        <p>During the boreal summer, the NPH is located farther north and, on average, is larger, stronger and more persistent.  Correspondingly, the easterly Trade winds intensify and extend on average to 35°N.  During the summer dry season the Aleutian Low is also located farther north. It is small and impermanent to nonexistent.</p>
+        <div>
+            <img width="388px" src="images/overview/gfs3_MSLP_WinterAverage.gif"/>
+            <img width="388px" src="images/overview/gfs3_MSLP_SummerAverage.gif"/>
+        </div>
+        <p>On an inter-annual basis, this annual pattern of storminess is influenced by the occurrence of so-called <a href="index.php?page=glossary#enso">El Niño -Southern Oscillation</a> (ENSO) events.  These quasi-cyclical events are associated with changes in a number of coupled oceanic and atmospheric conditions across the Pacific, including differences in atmospheric pressures in an east-west direction along the equator through the tropics, its effect on the Trade winds, sea-surface temperatures (SST), sea-surface height (SSH), the position of the jet streams and storm tracks, and the location and intensity of rainfall.  Even longer, multi-decadal cycles of coupled atmospheric-oceanic conditions referred to as the <a href="index.php?page=glossary#pdo">Pacific Decadal Oscillation</a> (PDO) have also been shown to influence storminess in the North Pacific.</p>
+        <p>With respect to the tropical North Pacific, intense low pressure, cyclonic systems originating in the in near-equatorial oceans known as <a href="index.php?page=glossary#tc">tropical cyclones, hurricanes, or typhoons</a> are a major generator of strong winds, heavy rains, and high seas.  When these powerful storms make landfall in the western North Pacific, the Hawaiian Islands, and the coasts of Southern California and Baja their impacts can be devastating.</p>
+        <p>Atmospheric circulation is a key driver of extreme waves and water levels.  Temporal and spatial patterns of wave heights, for example, mirror seasonal patterns of storminess.   However, other factors also come into play and particularly with respect to water levels.  At the largest scale the <a href="index.php?page=glossary#gsl">global sea level</a> is determined by the volume of water in the ocean basin.  Estimates obtained from sea level stations and satellite observations indicate that over the long term the global mean sea level is rising.  At smaller scales the local water level is controlled to a great extent by the daily variations in elevation attributable to the <a href="index.php?page=glossary#tides">tides</a>.   In between is a host of phenomena including barometric pressure effects, temperature effects, density currents, etc. that affect water levels regionally over periods of days to months.</p>
+    </div>
+</div>

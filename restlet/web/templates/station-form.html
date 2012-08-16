@@ -1,0 +1,25 @@
+<form action="" method="post">
+    <div class="section">
+        <h4>Station Information</h4>
+        <@forms.inputText field=form.atts.stationname size=52/>
+        <@forms.inputText field=form.atts.localid size=52/>
+        <@forms.inputRadio field=form.atts.process/>
+        <@forms.inputText field=form.atts.stationtype/>
+        <@forms.inputRadio field=form.atts.onum/>
+        <@forms.inputText field=form.atts.metadata size=52/>
+        <@forms.inputRadio field=form.atts.status/>
+        <div class="row"></div>
+    </div>
+    <div class="section">
+        <h4>Station Location</h4>
+        <@forms.inputRadio field=form.atts.region/>
+        <@forms.inputText field=form.atts.nation/>
+        <@forms.inputText field=form.atts.latitude size=12/>
+        <@forms.inputText field=form.atts.longitude size=12/>
+        <div class="row"></div>
+    </div>
+    <@forms.hidden form.hidden.stationid/>
+    <div class="section">
+        <input type='submit'/>
+    </div>
+</form>

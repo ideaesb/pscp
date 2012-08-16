@@ -1,0 +1,15 @@
+<#if table.message??>
+    <h5>${table.message}</h5>
+</#if>
+<#list table.linkgroups as group>
+    <h5>${group.name}</h5>
+    <#list group.links as link>
+        <div class="productLink">
+            <a target="product" href="${link.pageurl}">${link.name}</a>
+        </div>
+    </#list>
+    <a class="centered about" target="about" href="${group.about}">[About this product]</a>
+</#list>
+<div class="centered">
+    <a target="station" href="${table.stationpage}">[ View all Products for this Station ]</a>
+</div>
